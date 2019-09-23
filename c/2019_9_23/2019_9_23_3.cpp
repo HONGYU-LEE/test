@@ -4,8 +4,9 @@
 int main()
 {
 	int i; 	
-	char str2[]={0};
 	char str1[]="password";
+	char str2[20]={0};
+
 
 	for(i=0; i<3; i++)
 	{
