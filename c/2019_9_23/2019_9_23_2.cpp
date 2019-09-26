@@ -26,7 +26,7 @@ int Binary_Search(int right,int n,int arr[])
 }
 int main()
 {
-	int arr[] ={1,2,3,4,5,6,7,8,9,10};
+	int arr[] ={1,3,5,7,9,11,13,15,17,19};
 	int n,i,right,left,mid;
 	right = sizeof(arr)/sizeof(arr[0])-1;
 	left =0;

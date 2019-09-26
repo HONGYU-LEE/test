@@ -59,5 +59,6 @@ int main()
 		} 
 		
 	} while (n);
+	
 	return 0;
 } 
