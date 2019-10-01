@@ -3,7 +3,7 @@
 int main()
 {
 	int i,j,count=0;
-	for( i=100; i<=200; i++)
+	for( i=1; i<=200; i++)
 	{
 		for( j=2; j<=sqrt(i); j++)
 		{ 
