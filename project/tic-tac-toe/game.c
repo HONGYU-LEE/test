@@ -56,7 +56,7 @@ void Player_Move(char Checkerboard[ROW][COL], int row, int col)
 	{
 		printf("请输入您要下的位置：\n");
 		scanf("%d%d", &x, &y);
-		if (x > 0 && x <= ROW && x > 0 && x <= ROW)
+		if (x > 0 && x <= ROW && y > 0 && y <= COL)
 		{
 
 			if (Checkerboard[x - 1][y - 1] == ' ')
