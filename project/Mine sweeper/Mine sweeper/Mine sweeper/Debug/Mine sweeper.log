@@ -1,0 +1,13 @@
+﻿  game.c
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\head.h(29,75): error C2085: “Game”: 不在形参表中
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\game.c(4,1): error C2082: 形参“GameMenu”的重定义
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\game.c(4,1): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\game.c(92,1): error C2084: 函数“char FindBoom(char (*)[11],char (*)[11],int,int)”已有主体
+  test.c
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\head.h(27): message : 参见“FindBoom”的前一个定义
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\test.c(1,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\head.h(29,75): error C2085: “Game”: 不在形参表中
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\test.c(3,1): error C2085: “main”: 不在形参表中
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\test.c(3,1): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+  正在生成代码...
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\test.c(17,8): warning C4013: “Game”未定义；假设外部返回 int
