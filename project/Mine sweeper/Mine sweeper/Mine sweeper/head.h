@@ -24,6 +24,6 @@ void ShowBoard(char Board[ROWS][COLS], int row, int col);
 
 int BombsAround(char Boom[ROWS][COLS], int row, int col);
 
-char FindBoom(char Board[ROWS][COLS], char Boom[ROWS][COLS], int row, int col)
+char FindBoom(char Board[ROWS][COLS], char Boom[ROWS][COLS], int row, int col);
 
 void Game(char Board[ROWS][COLS], char Boom[ROWS][COLS], int row, int col);

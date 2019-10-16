@@ -1,4 +1,5 @@
 #include "head.h"
+
 int main()
 {
 	int n;
