@@ -3,8 +3,8 @@
 int main()
 {
 	int n;
-	char Board1[ROWS][COLS] = { 0 };
-	char Boom1[ROWS][COLS] = { 0 };
+	char board[ROWS][COLS] = { 0 };
+	char bombs[ROWS][COLS] = { 0 };
 	srand((int)time(NULL));
 	do
 	{
@@ -15,7 +15,7 @@ int main()
 		switch (n)
 		{
 		case 1:
-			Game(Board1, Boom1, ROWS, COLS);
+			Game(board, bombs, ROWS, COLS);
 			break;
 		case 0:
 			printf("Ω· ¯”Œœ∑\n");

@@ -19,22 +19,24 @@ void InitBoard(char Board[ROWS][COLS], int row, int col,char ch)
 		}
 	}
 }
+//初始化
 
-void SetBoom(char Boom[ROWS][COLS], int row, int col)
+void SetBombs(char Bombs[ROWS][COLS], int row, int col, int Bombsnum)
 {
 	int x, y,count=0;
-	while( count < BOOMNUM )
+	while( count < Bombsnum )
 	{
 		x = rand() % row+1;
 		y = rand() % col+1;
 
-		if (Boom[x][y] != '1')
+		if (Bombs[x][y] != '1')
 		{
-			Boom[x][y] = '1';
+			Bombs[x][y] = '1';
 			count++;
 		}
 	}
 }
+//放置炸弹
 
 void ShowBoard(char Board[ROWS][COLS], int row, int col)
 {
@@ -76,13 +78,66 @@ void ShowBoard(char Board[ROWS][COLS], int row, int col)
 		printf("\n");
 	}
 }
+//界面
 
-int BombsAround(char Boom[ROWS][COLS], int row, int col)
+int BombsAround(char Bombs[ROWS][COLS], int row, int col)
 {
-	return Boom[row - 1][col] + Boom[row + 1][col] + Boom[row][col - 1] + Boom[row][col + 1] + Boom[row + 1][col + 1] + Boom[row - 1][col - 1] + Boom[row + 1][col - 1] + Boom[row - 1][col + 1] - 8 * '0';
+	return Bombs[row - 1][col] + Bombs[row + 1][col] + Bombs[row][col - 1] + Bombs[row][col + 1] + Bombs[row + 1][col + 1] + Bombs[row - 1][col - 1] + Bombs[row + 1][col - 1] + Bombs[row - 1][col + 1] - 8 * '0';
+}
+//算出周围的炸弹
+
+void MoveBomb(char Bombs[ROWS][COLS], int row, int col)
+{
+	Bombs[row][col] = '0';
+	SetBombs(Bombs, ROW, COL, 1);
+}
+//防止玩家第一次选择时遇到炸弹，将炸弹移动到别的位置
+
+void SafeArea(char Board[ROWS][COLS], char Bombs[ROWS][COLS], int row, int col)
+{
+	int flag;
+	flag = BombsAround(Bombs, row, col);
+	if (0 == flag)
+	{
+		Board[row][col] = ' ';
+		if (row - 1 > 0 && row + 1 <= ROW && col > 0 && col <= COL && Board[row - 1][col] == '*')
+			SafeArea(Board, Bombs, row-1, col);
+		if (row + 1 > 0 && row + 1 <= ROW && col > 0 && col <= COL && Board[row +1 ][col] == '*')
+			SafeArea(Board, Bombs, row+1, col);
+		if (row > 0 && row <= ROW && col - 1 > 0 && col - 1 <= COL && Board[row][col - 1] == '*')
+			SafeArea(Board, Bombs, row, col-1);
+		if (row > 0 && row <= ROW && col + 1 > 0 && col + 1 <= COL && Board[row][col + 1] == '*')
+			SafeArea(Board, Bombs, row, col+1);
+		if (row - 1 > 0 && row - 1 <= ROW && col - 1 > 0 && col - 1 <= COL && Board[row - 1][col - 1] == '*')
+			SafeArea(Board, Bombs, row-1, col-1);
+		if (row + 1 > 0 && row + 1 <= ROW && col + 1 > 0 && col + 1 <= COL && Board[row + 1][col + 1] == '*')
+			SafeArea(Board, Bombs, row+1, col+1);
+		if (row - 1 > 0 && row - 1 <= ROW && col + 1 > 0 && col + 1 <= COL && Board[row - 1][col + 1] == '*')
+			SafeArea(Board, Bombs, row-1, col+1);
+		if (row + 1 > 0 && row + 1 <= ROW && col - 1 > 0 && col - 1 <= COL && Board[row + 1][col - 1] == '*')
+			SafeArea(Board, Bombs, row+1, col-1);
+	}
+	else
+	{
+		Board[row][col] = BombsAround(Bombs, row, col) + '0';
+	}
 }
 
-char FindBoom(char Board[ROWS][COLS], char Boom[ROWS][COLS], int row, int col)
+int WinGame(char Board[ROWS][COLS], int row, int col)
+{
+	int i, j, flag=0;
+	for (i=1; i < row; i++)
+	{
+		for (j = 1; j < col; j++)
+		{
+			if (Board[i][j] == '*')
+				flag++;
+		}
+	}
+	return flag;
+}
+
+char FindBombs(char Board[ROWS][COLS], char Bombs[ROWS][COLS], int row, int col)
 {
 	int x, y,count=0;
 	while(count != SAFENUM)
@@ -92,41 +147,56 @@ char FindBoom(char Board[ROWS][COLS], char Boom[ROWS][COLS], int row, int col)
 		system("CLS");
 		if (x > 0 && x <= row && y > 0 && y <= col)
 		{
-			if (Boom[x][y] == '1')
+			if (Bombs[x][y] == '1')
 			{
-				ShowBoard(Boom, ROW, COL);
-				return 'F';
+				if (0 == count)
+				{
+					MoveBomb(Bombs, x, y);
+					Board[x][y] = BombsAround(Bombs, x, y) + '0';
+					if (Board[x][y] == '0')
+						Board[x][y] = ' ';
+					SafeArea(Board, Bombs, x, y);
+					count++;
+				}
+				else
+				{
+					ShowBoard(Bombs, ROW, COL);
+					return 'F';
+				}
+
 			}
-			if ( Boom[x][y] != '0' )
+			else if (Board[x][y] >= '0' && Board[x][y] <= '8' && Board[x][y] != '*' && Board[x][y] != ' ')
 			{
 				printf("该坐标已被输入\n");
 			}
 			else
 			{
-				Board[x][y] = BombsAround(Boom, x, y) + '0';
+				Board[x][y] = BombsAround(Bombs, x, y) + '0';
+				SafeArea(Board, Bombs, x, y);
 				count++;
+				if (WinGame(Board, ROW, COL) == BOMBSNUM)
+					return 'T';
 				ShowBoard(Board, ROW, COL);
 			}
-
 		}
 		else
 		{
 			printf("输入错误，请重新输入\n");
 		}
 	}
-	return 'T';
 }
+//排查炸弹
 
-void Game(char Board[ROWS][COLS],char Boom[ROWS][COLS], int row, int col)
+void Game(char Board[ROWS][COLS],char Bombs[ROWS][COLS], int row, int col)
 {
 	char flag;
 	InitBoard(Board, ROWS, COLS, '*');
-	InitBoard(Boom, ROWS, COLS, '0');
-	SetBoom(Boom, ROW, COL);
+	InitBoard(Bombs, ROWS, COLS, '0');
+	SetBombs(Bombs, ROW, COL, BOMBSNUM);
 	ShowBoard(Board, ROW, COL);
 	printf("\n");
-	ShowBoard(Boom, ROW, COL);
-	flag = FindBoom(Board, Boom, ROW, COL);
+	ShowBoard(Bombs, ROW, COL);
+	flag = FindBombs(Board, Bombs, ROW, COL);
 	if (flag == 'F')
 	{
 		printf("该位置为炸弹，游戏结束\n");

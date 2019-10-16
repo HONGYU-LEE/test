@@ -1,2 +1,5 @@
 ﻿  game.c
+  test.c
+  正在生成代码...
+C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Mine sweeper\game.c(187): warning C4715: “FindBombs”: 不是所有的控件路径都返回值
   Mine sweeper.vcxproj -> C:\Users\Administrator\Desktop\code\github\test\project\Mine sweeper\Mine sweeper\Debug\Mine sweeper.exe
