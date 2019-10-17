@@ -139,8 +139,8 @@ int WinGame(char Board[ROWS][COLS], int row, int col)
 
 char FindBombs(char Board[ROWS][COLS], char Bombs[ROWS][COLS], int row, int col)
 {
-	int x, y,count=0;
-	while(count != SAFENUM)
+	int x, y,count=1;
+	while(count)
 	{
 		printf("请输入行和列：\n");
 		scanf("%d%d",&x,&y);
@@ -149,12 +149,10 @@ char FindBombs(char Board[ROWS][COLS], char Bombs[ROWS][COLS], int row, int col)
 		{
 			if (Bombs[x][y] == '1')
 			{
-				if (0 == count)
+				if (1 == count)
 				{
 					MoveBomb(Bombs, x, y);
 					Board[x][y] = BombsAround(Bombs, x, y) + '0';
-					if (Board[x][y] == '0')
-						Board[x][y] = ' ';
 					SafeArea(Board, Bombs, x, y);
 					count++;
 				}
@@ -195,7 +193,6 @@ void Game(char Board[ROWS][COLS],char Bombs[ROWS][COLS], int row, int col)
 	SetBombs(Bombs, ROW, COL, BOMBSNUM);
 	ShowBoard(Board, ROW, COL);
 	printf("\n");
-	ShowBoard(Bombs, ROW, COL);
 	flag = FindBombs(Board, Bombs, ROW, COL);
 	if (flag == 'F')
 	{

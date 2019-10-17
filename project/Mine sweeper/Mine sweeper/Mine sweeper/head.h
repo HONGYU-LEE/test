@@ -8,11 +8,11 @@
 #define ROW 9
 #define COL 9
 
-#define ROWS 11
-#define COLS 11
+#define ROWS ROW+2
+#define COLS COL+2
 
 #define BOMBSNUM 10
-#define SAFENUM ROW*COL-BOMBSNUM
+
 
 void GameMenu();
 
