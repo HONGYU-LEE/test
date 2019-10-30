@@ -1,5 +1,5 @@
 #include<stdio.h>
-int Binary_Search(int right,int n,int arr[])
+int Search(int right,int n,int arr[])
 {
 	int left =0,mid;
 	while(left <= right)
@@ -33,7 +33,7 @@ int main()
 	
 	printf("请输入要查找的数据:");
 	scanf("%d",&n);
-	mid = Binary_Search(right,n,arr);
+	mid = Search(right,n,arr);
 	
 	if( -1 == mid )
 	{
