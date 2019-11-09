@@ -164,3 +164,12 @@ unsigned int reverse_bit(unsigned int value);
 student a am i
 i ma a tneduts
 i am a student
+
+2019_11_9
+
+1.实现一个函数，可以左旋字符串中的k个字符。
+ABCD左旋一个字符得到BCDA
+ABCD左旋两个字符得到CDAB
+1.依次交换字符串完成
+2.反转字符串完成
+
