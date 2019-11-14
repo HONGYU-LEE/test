@@ -6,11 +6,9 @@ char* my_strcpy(char* dest, const char* src)
 {
 	char* str = dest;
 	assert(dest && src);
-	while (*dest++ = *src++)
-	{
-		;
-	}
-	return dest;
+	while (*dest++ = *src++);
+
+	return str;
 }
 
 int main()
