@@ -201,7 +201,7 @@ ABCD左旋两个字符得到CDAB
 1.模拟实现strstr
 
 2019_11_16
-1.模拟实现strcmp、
+1.模拟实现strcmp
 
 2019_11_17
 1.模拟实现memcpy
