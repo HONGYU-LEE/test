@@ -2,9 +2,9 @@
 #include<stdio.h>
 #include<assert.h>
 
-int my_strlen(const char* p)
+size_t my_strlen(const char* p)
 {
-	int count = 0;
+	size_t count = 0;
 	assert(p != NULL);
 	while (*p)
 	{

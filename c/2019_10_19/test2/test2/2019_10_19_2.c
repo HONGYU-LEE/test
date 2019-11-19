@@ -2,9 +2,9 @@
 #include<stdio.h>
 #include<assert.h>
 
-char* my_strcpy(char* dest, const char* src)
+char* my_strcpy(char* dst, const char* src)
 {
-	char* str = dest;
+	char* str = dst;
 	assert(dest && src);
 	while (*dest++ = *src++);
 
