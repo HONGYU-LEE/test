@@ -240,6 +240,7 @@ void SaveContact(pcontact p)
 	}
 	printf("通讯录保存成功\n");
 	fclose(pf);
+	pf = NULL;
 }
 
 void LoadContact(pcontact p)
@@ -261,4 +262,12 @@ void LoadContact(pcontact p)
 	}
 	printf("通讯录读取成功\n");
 	fclose(pf);
+	pf = NULL;
+}
+
+void EndContact(pcontact p)
+{
+	free(p->data);
+	p->data = NULL;
+	exit(0);
 }

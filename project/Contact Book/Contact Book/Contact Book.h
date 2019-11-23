@@ -41,4 +41,5 @@ int CheckCapacity(pcontact p);
 int GetPosition(char* name, pcontact p);
 void SaveContact(pcontact p);
 void LoadContact(pcontact p);
+void EndContact(pcontact p);
 

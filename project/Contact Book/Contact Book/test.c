@@ -16,8 +16,9 @@ void Test()
 {
 	int input;
 	contact book;
-	void (*p[9])(pcontact p) =
+	void (*p[10])(pcontact p) =
 	{
+		EndContact,
 		AddContact,
 		DelContact,
 		ModifyContact,
@@ -38,13 +39,9 @@ void Test()
 		Menu();
 		printf("请输入要进行的操作：");
 		scanf("%d", &input);
-		if ((input <= 9 && input > 0))
+		if ((input <= 9 && input >= 0))
 		{
-			(*p[input - 1])(&book);
-		}
-		else if (0 == input)
-		{
-			exit(0);
+			(*p[input])(&book);
 		}
 		else
 		{
