@@ -1,11 +1,15 @@
-
 #include "Contact Book.h"
 
 void InitContact(pcontact p)
 {
-	p->size = 0;
 	p->data = (info*)malloc(CONTACT_SIZE * sizeof(info));
+	if (NULL == p->data)
+	{
+		printf("初始化失败！！！\n");
+		exit(0);
+	}
 	p->capacity = CONTACT_SIZE;
+	p->size = 0;
 }
 
 void AddContact(pcontact p)
@@ -227,7 +231,7 @@ void SaveContact(pcontact p)
 {
 	assert(p);
 	system("cls");
-	FILE* pf = fopen("contact.txt", "w");
+	FILE* pf = fopen("contact.dat", "wb");
 	int i;
 	if (NULL == pf)
 	{
@@ -247,7 +251,7 @@ void LoadContact(pcontact p)
 {
 	assert(p);
 	system("cls");
-	FILE* pf = fopen("contact.txt", "r");
+	FILE* pf = fopen("contact.dat", "rb");
 	if (NULL == pf)
 	{
 		printf("文件打开失败\n");
@@ -269,5 +273,7 @@ void EndContact(pcontact p)
 {
 	free(p->data);
 	p->data = NULL;
+	p->size = 0;
+	p->capacity = 0;
 	exit(0);
 }
