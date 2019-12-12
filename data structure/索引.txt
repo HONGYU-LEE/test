@@ -17,3 +17,6 @@ void DestroyQueue(SqQueue *&q);  //销毁队列；
 bool QueueEmpty(SqQueue *q);  //判定队列为空时返回true; 否则返回false;
 bool enQueue(SqQueue *&q,ElemType *e);  // e 入队；成功入队返回true; 否则返回false;
 bool deQueue(SqQueue *&q,ElemType *&e);  //出队，返回出队元素e，且成功出队返回true,否则返回false;
+
+2019_12_11
+1.输入一个链表，输出该链表中倒数第k个结点。
