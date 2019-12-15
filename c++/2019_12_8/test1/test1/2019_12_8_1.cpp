@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 
 using namespace std;
@@ -8,7 +9,7 @@ public:
 	Student();
 	Student(const Student& s1);
 	~Student();
-
+	void display();
 private:
 	char* name;
 };
@@ -24,6 +25,11 @@ Student::~Student()
 	delete name;
 	cout << "Class Destruction" << endl;
 }
+
+void Student::display()
+{
+	cout << name << endl;
+}
 Student::Student(const Student& s1)
 {
 	name = new char[30];
@@ -35,5 +41,7 @@ int main()
 {
 	Student s1;
 	Student s2(s1);
+	s1.display();
+	s2.display();
 	return 0;
 }
