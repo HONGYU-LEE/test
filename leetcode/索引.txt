@@ -1,5 +1,7 @@
 21. 合并两个有序链表：将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。merge-two-sorted-lists
 
+142.环形链表 II：给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。linked-list-cycle-ii
+
 160.相交链表：编写一个程序，找到两个单链表相交的起始节点.	intersection-of-two-linked-lists
 
 203. 移除链表元素:删除链表中等于给定值 val 的所有节点	remove-linked-list-elements
