@@ -19,7 +19,7 @@ void test()
 		MuliplyBigNum,
 		DivideBigNum,
 	};
-	//函数指针数值简化代码
+	//函数指针数组简化代码
 	int input = 0;
 	BigNum s1, s2, s3;
 

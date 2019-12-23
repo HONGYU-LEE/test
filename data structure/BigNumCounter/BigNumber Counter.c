@@ -266,38 +266,6 @@ void DivideBigNum(BigNum* src1, BigNum* src2, BigNum* dst)
 	InitBigNum(dst, result);
 	
 }
-//void DivideBigNum1(BigNum* src1, BigNum* src2, BigNum* dst)
-//{
-//	char t[100] = { 0 };
-//	char b[2] = "0";
-//	BigNum* d1 = (BigNum*)malloc(sizeof(BigNum));
-//	if (strcmp(src1->data, src2->data) == 0) 
-//	{
-//		InitBigNum(d1, "0");
-//		InitBigNum(dst, "1");
-//	}
-//	else if (strcmp(src1->data, src2->data) < 0) 
-//	{
-//		InitBigNum(d1, src1->data);
-//		InitBigNum(dst, "0");
-//	}
-//	else 
-//	{
-//		BigNum* aa;
-//		aa = (BigNum*)malloc(sizeof(BigNum));
-//		InitBigNum(aa, src1->data);
-//		while (strcmp(aa->data, src2->data) >= 0) 
-//		{
-//			MinusBigNum(aa, src2, dst);
-//			InitBigNum(aa, dst->data);
-//			one(t);
-//		}
-//		InitBigNum(dst, t);
-//		InitBigNum(d1, aa->data);
-//	}
-//}
-//
-//
 
 void MuliplyBigNum(BigNum* src1, BigNum* src2, BigNum* dst)
 {
