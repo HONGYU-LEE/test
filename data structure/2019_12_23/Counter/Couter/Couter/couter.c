@@ -75,14 +75,14 @@ void Trans(char* s1, char* s2)
 {
 	int i = 0;
 	int j = 0;
-	int flag1 = -1;				//flag1为0表示上次输出为数字，flag1为1表示上次输出为字符
-	int flag2 = -1; 				//flag2为0表示上次扫描为数字，flag为1表示上次扫描为运算符，用于区分数字后加空格
-	cStack st1;				//暂放运算符 
+	int flag1 = -1;				
+	int flag2 = -1; 				
+	cStack st1;				
 	Initc(&st1);
 
-	while (s1[i] != '\0')			//处理负数 
+	while (s1[i] != '\0')		
 	{
-		if (s1[0] == '-')			//第一位数字为负数时 
+		if (s1[0] == '-')			
 		{
 			j = strlen(s1);
 			while (j > 0)
@@ -98,7 +98,7 @@ void Trans(char* s1, char* s2)
 			s1[j] = '*';
 
 		}
-		if (s1[i] == '(' && s1[i + 1] == '-')	//非第一位负数时 
+		if (s1[i] == '(' && s1[i + 1] == '-')	
 		{
 			j = strlen(s1);
 			while (j > i + 1)
@@ -121,7 +121,7 @@ void Trans(char* s1, char* s2)
 	j = 0;
 	while (s1[i] != '\0')
 	{
-		if (flag1 == 0 && flag2 == 1)		//若上次的输出为数字，上次循环扫描为字符，则表示该数字串结束，则在数字后加空格区分 
+		if (flag1 == 0 && flag2 == 1)		
 		{
 			s2[j++] = ' ';
 			flag1 = 1;
@@ -141,12 +141,12 @@ void Trans(char* s1, char* s2)
 			}
 			else
 			{
-				while (st1.top >= 0 && Isop(s1[i]) < Inop(Gettopc(&st1)))		//当前扫描字符优先级不断与栈顶字符优先级比较，当前字符小于栈顶字符时退栈并输出 
+				while (st1.top >= 0 && Isop(s1[i]) < Inop(Gettopc(&st1)))		
 				{
 					s2[j++] = Popc(&st1);
 					flag1 = 1;
 				}
-				if (st1.top<0 || Isop(s1[i])>Inop(Gettopc(&st1)))			//当前字符优先级大于栈顶优先级或栈空时当前字符压入字符栈内 
+				if (st1.top<0 || Isop(s1[i])>Inop(Gettopc(&st1)))			
 				{
 					Pushc(&st1, s1[i]);
 				}
@@ -156,7 +156,7 @@ void Trans(char* s1, char* s2)
 		else if (s1[i] == ')')
 		{
 			flag2 = 1;
-			if (Gettopc(&st1) != '(')		//若括号仅包含数字则没有输出运算符 
+			if (Gettopc(&st1) != '(')		
 			{
 				flag1 = 1;
 			}
@@ -164,29 +164,29 @@ void Trans(char* s1, char* s2)
 			{
 				s2[j++] = Popc(&st1);
 			}
-			Popc(&st1);		//将'('出栈 
+			Popc(&st1);		
 		}
 		i++;
 	}
-	while (st1.top >= 0)		//将栈内剩余的运算符依次退栈输出 
+	while (st1.top >= 0)		
 	{
 		s2[j++] = Popc(&st1);
 	}
 	s2[j] = '\0';
 }
 
-//表达式求值 
+
 double Calculate(char* s1)
 {
 	int i = 0;
-	int flag;				//char类型转换为double类型数据标记 
+	int flag;				
 	double data1, data2;
 	double sum;
 	dStack ds1;
 	Initd(&ds1);
 	while (s1[i] != '\0')
 	{
-		if (s1[i] == '+' || s1[i] == '-' || s1[i] == '*' || s1[i] == '/')			//若为运算符获取栈顶两个元素进行计算 
+		if (s1[i] == '+' || s1[i] == '-' || s1[i] == '*' || s1[i] == '/')			
 		{
 			data1 = Popd(&ds1);
 			data2 = Popd(&ds1);
@@ -195,14 +195,14 @@ double Calculate(char* s1)
 			else if (s1[i] == '*') Pushd(&ds1, data2 * data1);
 			else if (s1[i] == '/') Pushd(&ds1, data2 / data1);
 		}
-		else							//为数据时转化为double类型压栈 
+		else							
 		{
-			flag = 0;					//初始化为0为整数部分标记，1为小数部分标记 
+			flag = 0;					
 			sum = 0;
 			double divider = 1;
 			while (s1[i] != ' ' && s1[i] != '+' && s1[i] != '-' && s1[i] != '*' && s1[i] != '/')
 			{
-				if (s1[i] == '.')		//若有小数点，进入小数转化模式 
+				if (s1[i] == '.')		
 				{
 					flag = 1;
 					i++;
@@ -219,10 +219,10 @@ double Calculate(char* s1)
 				}
 				i++;
 			}
-			if (s1[i] == '+' || s1[i] == '-' || s1[i] == '*' || s1[i] == '/') i--;	//转化成功一个数据，若下个字符为运算符，则i--，回到当前运算的数据位置 
+			if (s1[i] == '+' || s1[i] == '-' || s1[i] == '*' || s1[i] == '/') i--;	
 			Pushd(&ds1, sum);
 		}
-		i++;		//i++准备下一个字符的转换 
+		i++;		
 	}
 	return Popd(&ds1);
 }

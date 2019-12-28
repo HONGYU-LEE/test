@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#define datasize 100
 
 void Swap(int* i, int* j);
 void BubbleSort(int* arr, int n);

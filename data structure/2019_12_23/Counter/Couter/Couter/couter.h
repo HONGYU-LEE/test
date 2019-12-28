@@ -17,16 +17,12 @@ typedef struct DoubleStack
 
 int Isop(char);
 int Inop(char);
-
 void Initc(cStack*);
 int Pushc(cStack*, char);
 char Gettopc(cStack*);
 char Popc(cStack*);
-
 void Initd(dStack*);
 int Pushd(dStack*, double);
 double Popd(dStack*);
-
 void Trans(char* s1, char* s2);
-
 double Calculate(char* s2);
