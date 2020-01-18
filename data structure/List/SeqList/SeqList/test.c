@@ -8,7 +8,7 @@ int main()
 	SeqListPushBack(&list, 2);
 
 	SeqListPushFront(&list, 3);
-	SeqListPushFront(&list, 4);
+	SeqListPushFront(&list, 8);
 	SeqListPrint(&list);
 
 	/*SeqListFind(&list, 4);
