@@ -2,6 +2,9 @@
 
 28.实现 strStr() 函数。 implement-strstr
 
+35.给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。search-insert-position
+
+
 142.环形链表 II：给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。linked-list-cycle-ii
 
 160.相交链表：编写一个程序，找到两个单链表相交的起始节点.	intersection-of-two-linked-lists
