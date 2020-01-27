@@ -14,11 +14,12 @@
 
 203. 移除链表元素:删除链表中等于给定值 val 的所有节点	remove-linked-list-elements
 
+217.存在重复元素：给定一个整数数组，判断是否存在重复元素。contains-duplicate
+
 231.2的幂
 
 709.转换成小写字母： 实现函数 ToLowerCase()，该函数接收一个字符串参数 str，并将该字符串中的大写字母转换成小写字母，之后返回新的字符串。 to-lower-case
 
 925.长按键入：你的朋友正在使用键盘输入他的名字 name。偶尔，在键入字符 c 时，按键可能会被长按，而字符可能被输入 1 次或多次。你将会检查键盘输入的字符 typed。如果它对应的可能是你的朋友的名字（其中一些字符可能被长按），那么就返回 True。long-pressed-name
-
 
 989. 数组形式的整数加法	add-to-array-form-of-integer
