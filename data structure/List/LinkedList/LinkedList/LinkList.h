@@ -17,6 +17,7 @@ void ListPrint(ListNode* list);
 void ListPushBack(ListNode** list, DATATYPE x);
 void ListPushFront(ListNode** list, DATATYPE x);
 void ListPopBack(ListNode** list);
+void ListPopFront(ListNode** list);
 void ListInsert(ListNode** pos, DATATYPE x);
 void ListErase(ListNode** pos);
 void ListDestory(ListNode** list);

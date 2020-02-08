@@ -7,14 +7,8 @@ void test()
 	ListPushFront(&list, 2);
 	ListPushFront(&list, 3);
 	ListPushFront(&list, 4);
-	//ListPrint(list);
-	ListPopBack(&list);
-	//ListPrint(list);
-	ListPopBack(&list);
-	//ListPrint(list);
-	ListPopBack(&list);
-	//ListPrint(list);
-	ListPopBack(&list);
+	ListPrint(list);
+
 
 	//ListPopBack(&list);
 	//ListPushBack(&list, 1);
