@@ -2,8 +2,9 @@ import requests
 import bs4
 
 def get_html(url):
+    proxies = {"http": "36.25.243.51", "http": "39.137.95.70", "http": "59.56.28.199"}
     headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'}
-    response = requests.get(url, headers = headers)
+    response = requests.get(url, headers = headers, proxies = proxies)
 
     return response.text
 
@@ -25,7 +26,7 @@ def get_datas(text):
 
     return data
 
-def grouped(iterable, n):
+def Slicing(iterable, n):
       return zip(*[iter(iterable)] * n)    
 
     
@@ -34,8 +35,8 @@ def main():
     text = get_html(url)
     datas = get_datas(text)
 
-    with open('Animation Leaderboard.txt', 'a', encoding = "utf-8") as file:
-        for rank, title, updata, play, view, fav, link in grouped(datas, 7):
+    with open('Bilibili新番榜排行前五十.txt', 'a', encoding = "utf-8") as file:
+        for rank, title, updata, play, view, fav, link in Slicing(datas, 7):
             file.write(''.join(['排名： ',rank,' 标题： ',title,' 集数： ',updata,' 观看数： ', play,' 评论数: ',view, ' 喜欢数: ', fav, ' 链接 ：',link, '\n']))
             
 

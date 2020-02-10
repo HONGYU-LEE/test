@@ -33,5 +33,5 @@ while True:
     result = result['translateResult'][0][0]['tgt']
 
     print(result)
-    time.sleep(3);
+    time.sleep(3)
 
