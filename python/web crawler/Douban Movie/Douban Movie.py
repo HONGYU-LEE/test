@@ -11,7 +11,7 @@ def get_html(url):
 def get_datas(text):
     soup = bs4.BeautifulSoup(text, "html.parser")
     datas = soup.find_all('div', class_ = 'info')
-    data = []
+    
     for each in datas:
         title = each.a.span.text
         introduction = each.p.text.strip()
@@ -29,15 +29,15 @@ def main():
     host = "https://movie.douban.com/top250"
     text = get_html(host)
     datas = get_datas(text)
+    data = []
     index = 1
   
-   # for i in range(50):
-   #     url = host + '/?start=' + str(25 * i)
-   #    datas = get_datas(text)
+    for i in range(10):
+        url = host + '/?start=' + str(25 * i) + '&filter='
+        text = get_html(url) 
+        datas.extend(get_datas(text))
    
-    
-    i = 0
-    with open('豆瓣电源top250.txt', 'a', encoding = "utf-8") as file:
+    with open('豆瓣电源top250.txt', 'w', encoding = "utf-8") as file:
         for title, introduction, score in Slicing(datas, 3):
             file.write(''.join(['排名：', str(index), '\n', title, '\n', introduction, '\t评分：', score, '\n']))
             index += 1
