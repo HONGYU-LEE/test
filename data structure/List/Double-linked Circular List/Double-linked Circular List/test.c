@@ -3,34 +3,41 @@
 void test()
 {
 	ListNode* list = ListCreate();
-	//ListPushFront(list, 1);
-	//ListPushFront(list, 2);
-	//ListPushFront(list, 3);
-	//ListPushFront(list, 4);
-
-
-	//ListPushBack(list, 1);
-	//ListPushBack(list, 2);
-	//ListPushBack(list, 3);
-	//ListPushBack(list, 4);
-
-	ListInsert(list, 1);
+	printf("Í·²å\n");
+	ListPushFront(list, 1);
 	ListPrint(list);
-	ListInsert(list, 2);
+	ListPushFront(list, 2);
 	ListPrint(list);
-	ListInsert(list, 3);
+	ListPushFront(list, 3);
 	ListPrint(list);
-	ListInsert(list, 4);
+	ListPushFront(list, 4);
 	ListPrint(list);
-
-	//ListPopBack(list);
-	ListErase(list->prev);
+	printf("Í·É¾\n");
+	ListPopFront(list);
 	ListPrint(list);
-	ListErase(list->prev);
+	ListPopFront(list);
 	ListPrint(list);
-	ListErase(list->prev);
+	ListPopFront(list);
 	ListPrint(list);
-	ListErase(list->prev);
+	ListPopFront(list);
+	ListPrint(list);
+	printf("Î²²å\n");
+	ListPushBack(list, 1);
+	ListPrint(list);
+	ListPushBack(list, 2);
+	ListPrint(list);
+	ListPushBack(list, 3);
+	ListPrint(list);
+	ListPushBack(list, 4);
+	ListPrint(list);
+	printf("Î²É¾\n");
+	ListPopBack(list);
+	ListPrint(list);
+	ListPopBack(list);
+	ListPrint(list);
+	ListPopBack(list);
+	ListPrint(list);
+	ListPopBack(list);
 	ListPrint(list);
 }
 
