@@ -2,14 +2,11 @@
 
 void ChackCapacity(Stack* ps)
 {
-	void ChackCapacity(Stack * ps)
+	if (ps->top >= ps->capacity)
 	{
-		if (ps->top >= ps->capacity)
-		{
-			ps->capacity *= 2;
-			ps->data = (DataType*)realloc(ps->data, ps->capacity * sizeof(DataType));
+		ps->capacity *= 2;
+		ps->data = (DataType*)realloc(ps->data, ps->capacity * sizeof(DataType));
 
-		}
 	}
 }
 void StackInit(Stack* ps)

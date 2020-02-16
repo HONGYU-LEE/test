@@ -26,6 +26,6 @@ int StackSize(Stack* ps);
 int StackEmpty(Stack* ps);
 // 销毁栈 
 void StackDestroy(Stack* ps);
-
+//确认是否需要扩容
 void ChackCapacity(Stack* ps);
 
