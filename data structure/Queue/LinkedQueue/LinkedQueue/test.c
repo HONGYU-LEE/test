@@ -7,20 +7,15 @@ test()
 	QueueInit(&q);
 
 	QueuePush(&q, 1);
+	printf("%d ", QueueBack(&q));
 	QueuePush(&q, 2);
+	printf("%d ", QueueBack(&q));
 	QueuePush(&q, 3);
-	printf("%d\n", QueueSize(&q));
+	printf("%d ", QueueBack(&q));
 	QueuePush(&q, 4);
+	printf("%d\n ", QueueBack(&q));
 
-	printf("%d\n", QueueEmpty(&q));
-	printf("%d\n", QueueSize(&q));
-
-	QueuePop(&q);
-	QueuePop(&q);
-	QueuePop(&q);
-	QueuePop(&q);
-	printf("%d\n", QueueEmpty(&q));
-	printf("%d\n", QueueSize(&q));
+	printf("队列元素数量为：%d", QueueSize(&q));
 }
 
 int main()
