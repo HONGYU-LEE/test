@@ -1,3 +1,8 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<stdbool.h>
+#include<ctype.h> 
 bool isnum(const char* str)
 {
     if(*str == '-' && strlen(str) == 1)
@@ -27,11 +32,11 @@ int getnum(const char* str)
     return flag ? ret : - ret;
 }
 
-int evalRPN(char ** tokens, int tokensSize){
+int evalRPN(char tokens[13][3], int tokensSize){
     int count, num1, num2, j = 0;
     int *stack = (int*)malloc(sizeof(int) * tokensSize);
-
-    for(int i = 0; i < tokensSize; i++)
+	int i;
+    for(i = 0; i < tokensSize; i++)
     {
         if (isnum(tokens[i]))
         {
@@ -73,3 +78,11 @@ int evalRPN(char ** tokens, int tokensSize){
     count = stack[j - 1];
     return count;
 }
+
+int main()
+{
+	char str[13][3] ={"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
+	printf("%d", evalRPN(str, 13));
+	return 0;
+	
+} 
