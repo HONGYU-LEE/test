@@ -1,0 +1,118 @@
+#include "Heap.h"
+
+void Swap(DataType* a, DataType* b)
+{
+	DataType temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void AdjustDown(DataType* data, int size, int root)
+{
+	assert(data);
+
+	int parent = root;
+	int child = root * 2 + 1;
+
+	while (child < size)
+	{
+		if (child + 1 < size && data[child + 1] < data[child])
+		{
+			++child;
+		}
+
+		if (data[child] < data[parent])
+		{
+			Swap(&data[child], &data[parent]);
+		}
+		else
+			break;
+
+		parent = child;
+		child = parent * 2 + 1;
+	}
+}
+
+void AdjustUp(DataType* data, int child)
+{
+	int parent = (child - 1) / 2;
+	
+	while (child > 0)
+	{
+		if (data[child] < data[parent])
+		{
+			Swap(&data[child], &data[parent]);
+			child = parent;
+			parent = (child - 1) / 2;
+		}
+		else
+			break;
+	}
+}
+
+void HeapCreate(Heap* hp, DataType* data, int size)
+{
+
+	hp->data = (DataType*)malloc(size * sizeof(DataType));
+	memcpy(hp->data, data, size * sizeof(DataType));
+	hp->size = size;
+	hp->capacity = size;
+
+	for (int i = (size - 2) / 2; i >= 0; i--)
+	{
+		AdjustDown(hp->data, hp->size, i);
+	}
+}
+
+void HeapPush(Heap* hp, DataType x)
+{
+	if (hp->size == hp->capacity)
+	{
+		hp->capacity *= 2;
+		hp->data = (DataType*)realloc(hp->data, hp->capacity * sizeof(DataType));
+	}
+
+	hp->data[hp->size++] = x;
+
+	AdjustUp(hp->data, hp->size - 1);
+}
+
+void HeapPop(Heap* hp)
+{
+	Swap(&hp->data[hp->size - 1], &hp->data[0]);
+	hp->size--;
+
+	AdjustDown(hp->data, hp->size, 0);
+}
+
+int HeapEmpty(Heap* hp)
+{
+	return hp->size ? 0 : 1;
+}
+
+DataType HeapTop(Heap* hp)
+{
+	return hp->data[0];
+}
+
+int HeapSize(Heap* hp)
+{
+	return hp->size;
+}
+
+void HeapPrint(Heap* hp)
+{
+	int i = 0;
+
+	for (i = 0; i < hp->size; i++)
+	{
+		printf("%d ", hp->data[i]);
+	}
+}
+
+void HeapDestory(Heap* hp)
+{
+	free(hp->data);
+	hp->data = NULL;
+	free(hp);
+	hp = NULL;

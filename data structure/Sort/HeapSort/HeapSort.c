@@ -34,7 +34,8 @@ void HeapSort(int *arr, int size)
 	{
 		AdjustDown(arr, size, i);
 	}
-	
+	//´´½¨¶Ñ
+	 
 	for(i = size - 1; i > 0; i--)
 	{		
 		int temp = arr[0];
