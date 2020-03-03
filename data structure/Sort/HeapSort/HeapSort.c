@@ -34,8 +34,7 @@ void HeapSort(int *arr, int size)
 	{
 		AdjustDown(arr, size, i);
 	}
-	//´´½¨¶Ñ
-	 
+
 	for(i = size - 1; i > 0; i--)
 	{		
 		int temp = arr[0];
@@ -47,11 +46,12 @@ void HeapSort(int *arr, int size)
 
 int main()
 {
-	int arr[10] = {46, 74, 53, 14, 26, 36, 86, 65, 27, 34};
+//	int arr[10] = {46, 74, 53, 14, 26, 36, 86, 65, 27, 34};
+	int arr[] = {34, 53, 36, 46, 726, 14, 86, 65, 27, 4};
 	int length = sizeof(arr) / sizeof(arr[0]);
 	int i = 0;
-	HeapSort(arr, length); 
-	for (i = 0; i < 10; i++)
+	HeapSort(arr, length);
+	for(i = 0; i < length; i++)  
 	{
 		printf("%d ", arr[i]);
 	}

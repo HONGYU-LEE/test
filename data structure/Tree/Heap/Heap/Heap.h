@@ -16,7 +16,7 @@ void Swap(DataType* a, DataType* b);
 void AdjustDown(DataType* data, int size, int root);
 //向下调整算法
 void AdjustUp(DataType* data, int child);
-//向下调整算法
+//向上调整算法
 void HeapCreate(Heap* hp, DataType* data, int size);
 //创建堆
 void HeapDestory(Heap* hp);

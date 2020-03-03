@@ -114,5 +114,18 @@ void HeapDestory(Heap* hp)
 {
 	free(hp->data);
 	hp->data = NULL;
+	hp->capacity = hp->size = 0;
 	free(hp);
 	hp = NULL;
+}
+
+void TopK(int* arr, int size, int k)
+{
+	Heap hp;
+	HeapCreate(&hp, arr, size);
+
+	if (HeapTop > )
+	{
+
+	}
+}
