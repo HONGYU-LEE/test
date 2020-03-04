@@ -7,12 +7,12 @@ void AdjustDown(int *arr, int size, int root)
 	
 	while(child < size)
 	{
-		if(child + 1 < size && arr[child] > arr[child + 1])
+		if(child + 1 < size && arr[child] < arr[child + 1])
 		{
 			++child;
 		}
 		
-		if(arr[child] < arr[parent])
+		if(arr[child] > arr[parent])
 		{
 			int temp = arr[parent];
 			arr[parent] = arr[child];
@@ -42,12 +42,13 @@ void HeapSort(int *arr, int size)
 		arr[i] = temp;
 		AdjustDown(arr, i, 0);
 	}
+ 
 }
 
 int main()
 {
-//	int arr[10] = {46, 74, 53, 14, 26, 36, 86, 65, 27, 34};
-	int arr[] = {34, 53, 36, 46, 726, 14, 86, 65, 27, 4};
+	int arr[] = {46, 74, 53, 14, 26, 36, 86, 65, 27, 34};
+//	int arr[] = {34, 53, 36, 46, 726, 14, 86, 65, 27, 4};
 	int length = sizeof(arr) / sizeof(arr[0]);
 	int i = 0;
 	HeapSort(arr, length);

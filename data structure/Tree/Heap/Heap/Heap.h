@@ -2,7 +2,7 @@
 #include<assert.h>
 #include<stdlib.h>
 #include<string.h>
-
+#include <time.h>
 typedef int DataType;
 
 typedef struct Heap
@@ -33,4 +33,5 @@ void HeapPrint(Heap* hp);
 //显示堆
 DataType HeapTop(Heap* hp);
 //取堆顶数据
-
+void TopK(int* arr, size_t size, int k);
+//TopK算法
