@@ -119,62 +119,45 @@ void HeapDestory(Heap* hp)
 	hp = NULL;
 }
 
-//void TopK(int* arr, int size, int k)
-//{
-//	Heap hp;
-//	HeapCreate(&hp, arr, k);
-//
-//	for (int i = k; i < size; i++)
-//	{
-//		if (HeapTop(&hp) < arr[i])
-//		{
-//			HeapPop(&hp);
-//			HeapPush(&hp, arr[i]);
-//		}
-//	}
-//
-//	HeapPrint(&hp);
-//}
-
-//void TopK(int* arr, int size, int k)
-//{
-//	Heap hp;
-//	HeapCreate(&hp, arr, k);
-//
-//	for (int i = k; i < size; i++)
-//	{
-//		if (HeapTop(&hp) < arr[i])
-//		{
-//			HeapPop(&hp);
-//			HeapPush(&hp, arr[i]);
-//		}
-//	}
-//
-//	HeapPrint(&hp);
-//}
-
 void TopK(int* arr, int size, int k)
 {
-	int *a = (int*)malloc(k * sizeof(int));
-	memcpy(a, arr, k * sizeof(int));
+	Heap hp;
+	HeapCreate(&hp, arr, k);
 
-	for (int i = (k - 2) / 2; i >= 0; i--)
+	for (int i = k; i < size; i++)
 	{
-		AdjustDown(a, k, i);
-	}
-
-	for (int i = 0; i < size; i++)
-	{
-		if (a[0] < arr[i])
+		if (HeapTop(&hp) < arr[i])
 		{
-			Swap(&a[0], &a[k - 1]);
-			AdjustDown(a, k - 1, 0);
-			a[k - 1] = arr[i];
-			AdjustUp(a, k - 1);
+			HeapPop(&hp);
+			HeapPush(&hp, arr[i]);
 		}
 	}
-	for (int i = 0; i < k; i++)
-	{
-		printf("%d  ", a[i]);
-	}
+
+	HeapPrint(&hp);
 }
+
+//void TopK(int* arr, int size, int k)
+//{
+//	int *a = (int*)malloc(k * sizeof(int));
+//	memcpy(a, arr, k * sizeof(int));
+//
+//	for (int i = (k - 2) / 2; i >= 0; i--)
+//	{
+//		AdjustDown(a, k, i);
+//	}
+//
+//	for (int i = 0; i < size; i++)
+//	{
+//		if (a[0] < arr[i])
+//		{
+//			Swap(&a[0], &a[k - 1]);
+//			AdjustDown(a, k - 1, 0);
+//			a[k - 1] = arr[i];
+//			AdjustUp(a, k - 1);
+//		}
+//	}
+//	for (int i = 0; i < k; i++)
+//	{
+//		printf("%d  ", a[i]);
+//	}
+//}
