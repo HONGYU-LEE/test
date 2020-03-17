@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+/* 
 void InsertSort(int* arr, int n)
 {
 	int i, j, temp;
@@ -16,7 +16,32 @@ void InsertSort(int* arr, int n)
 		} 
 	}
 }
+*/
 
+void InsertSort(int* arr, int n)
+{
+	int i, end, temp;
+	for(i = 0; i < n - 1; i++)
+	{
+		end = i;
+		temp = arr[end + 1];
+		
+		while(end >= 0)
+		{
+			if(arr[end] > temp)
+			{
+				arr[end + 1] = arr[end];
+				end--;
+			}
+			else
+				break;
+		}
+		
+		arr[end + 1] = temp;
+	} 
+}
+
+ 
 int main()
 {
 	int arr[10] = {46, 74, 53, 14, 26, 36, 86, 65, 27, 34};

@@ -11,7 +11,7 @@ typedef struct BTNode
 
 #include "LinkedQueue.h"
 
-// 通过前序遍历的数组"ABD##E#H##CF##G##"构建二叉树
+// 通过前序遍历的数组构建二叉树
 BTNode* BinaryTreeCreate(BTDataType* a, int n, int* pi);
 // 二叉树销毁
 void BinaryTreeDestory(BTNode* root);

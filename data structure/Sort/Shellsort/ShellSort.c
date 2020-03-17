@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+/* 
 void ShellSort(int* arr, int n)
 {
 	int i, j, temp;
@@ -24,6 +24,34 @@ void ShellSort(int* arr, int n)
 		}
 				
 	} while (gap > 1);
+}
+*/
+void ShellSort(int* arr, int n)
+{
+	int gap = n, i;
+	while(gap > 1)
+	{
+		gap = gap / 3 + 1;
+		
+		for(i = 0; i < n - gap; ++i)
+		{
+			int end = i;
+			int temp = arr[end + gap];	
+			
+			while(end >= 0)
+			{
+				if(arr[end] > temp)
+				{	
+					arr[end + gap] = arr[end];			
+					end -= gap;
+				}
+				else
+					break;	
+			} 
+			arr[end + gap] = temp;
+		}
+		
+	}
 }
 
 int main()

@@ -161,7 +161,6 @@ int BinaryTreeComplete(BTNode* root)
 		else
 			QueuePop(&q);
 
-
 		QueuePush(&q, node->left);
 		QueuePush(&q, node->right);
 	}
