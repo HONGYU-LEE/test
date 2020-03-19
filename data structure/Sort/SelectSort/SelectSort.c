@@ -1,5 +1,15 @@
 #include<stdio.h>
 
+void printArray(int *arr, int size)
+{
+	int i;
+	for(i = 0; i < size; i++)  
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n"); 
+} 
+
 void swap(int *x, int *y)
 {
 	int temp = *x;
@@ -21,7 +31,7 @@ void SelectSort(int *arr, int n)
 		
 		if(mini != i)
 			swap(&arr[i], &arr[mini]);
-
+		printArray(arr, n);
 	}
 }
 
@@ -31,10 +41,8 @@ int main()
 //	int arr[] = {34, 53, 36, 46, 726, 14, 86, 65, 27, 4};
 	int length = sizeof(arr) / sizeof(arr[0]);
 	int i = 0;
+	printArray(arr, length);
 	SelectSort(arr, length);
-	for(i = 0; i < length; i++)  
-	{
-		printf("%d ", arr[i]);
-	}
+	printArray(arr, length);
 	return 0;
 } 

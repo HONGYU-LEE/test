@@ -1,5 +1,14 @@
 #include<stdio.h>
 
+void printArray(int *arr, int size)
+{
+	int i;
+	for(i = 0; i < size; i++)  
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n"); 
+} 
 void swap(int *x, int *y)
 {
 	int temp = *x;
@@ -7,9 +16,9 @@ void swap(int *x, int *y)
 	*y = temp;
 } 
 
-void Double_SelectSort(int *arr, int n)
+void Double_SelectSort(int *arr, int size)
 {
-	int begin = 0, end = n - 1, i;
+	int begin = 0, end = size - 1, i;
 	
 	while(begin < end)
 	{
@@ -33,6 +42,8 @@ void Double_SelectSort(int *arr, int n)
 			
 		++begin;
 		--end;
+		
+		printArray(arr, size);
 	}
 }
 
@@ -42,10 +53,8 @@ int main()
 //	int arr[] = {34, 53, 36, 46, 726, 14, 86, 65, 27, 4};
 	int length = sizeof(arr) / sizeof(arr[0]);
 	int i = 0;
+	printArray(arr, length);
 	Double_SelectSort(arr, length);
-	for(i = 0; i < length; i++)  
-	{
-		printf("%d ", arr[i]);
-	}
+	printArray(arr, length);
 	return 0;
 } 
