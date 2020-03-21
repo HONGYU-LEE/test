@@ -1,4 +1,15 @@
 #include<stdio.h>
+
+void printArray(int *arr, int size)
+{
+	int i;
+	for(i = 0; i < size; i++)  
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n"); 
+} 
+
 /* 
 void InsertSort(int* arr, int n)
 {
@@ -38,6 +49,7 @@ void InsertSort(int* arr, int n)
 		}
 		
 		arr[end + 1] = temp;
+		printArray(arr, n);
 	} 
 }
 
@@ -47,10 +59,7 @@ int main()
 	int arr[10] = {46, 74, 53, 14, 26, 36, 86, 65, 27, 34};
 	int length = sizeof(arr) / sizeof(arr[0]);
 	int i = 0;
+	printArray(arr, length);
 	InsertSort(arr, length); 
-	for (i = 0; i < 10; i++)
-	{
-		printf("%d ", arr[i]);
-	}
 	return 0;
 }
