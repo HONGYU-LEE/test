@@ -124,7 +124,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="QuickSort.c" />
+    <ClCompile Include="Stack.c" />
     <ClCompile Include="test.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
