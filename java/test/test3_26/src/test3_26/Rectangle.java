@@ -1,4 +1,4 @@
-package test_3_23;
+package test3_26;
 
 public class Rectangle extends Shape{
 

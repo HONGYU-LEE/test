@@ -29,9 +29,20 @@ void chancePovit(int* arr, int begin, int end)
 	}
 }
 
+void printArr(int* arr, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+
+	printf("\n");
+}
+
 // Hoare法
 int Hoare(int* arr, int begin, int end)
 {
+	chancePovit(arr, begin, end);
 	int pivot = arr[end];
 	int pivot_index = end;
 	while (begin < end)
@@ -50,7 +61,6 @@ int Hoare(int* arr, int begin, int end)
 	}
 
 	Swap(&arr[begin], &arr[pivot_index]);
-
 	return begin;
 }
 
@@ -58,6 +68,7 @@ int Hoare(int* arr, int begin, int end)
 //挖坑法
 int DigHole(int* arr, int begin, int end)
 {
+	chancePovit(arr, begin, end);
 	int pivot = arr[end];
 	while (begin < end)
 	{
@@ -67,7 +78,6 @@ int DigHole(int* arr, int begin, int end)
 		}
 
 		arr[end] = arr[begin];
-
 		while (begin < end && arr[end] >= pivot)
 		{
 			--end;
@@ -77,7 +87,6 @@ int DigHole(int* arr, int begin, int end)
 	}
 
 	arr[begin] = pivot;
-
 	return begin;
 }
 
@@ -109,9 +118,20 @@ void QuickSort(int* arr, int begin, int end)
 	if (begin < end)
 	{
 		int pivot = PrevCurMethod(arr, begin, end);
-
+		
 		QuickSort(arr, begin, pivot - 1);
 		QuickSort(arr, pivot + 1, end);
+	}
+}
+
+void QuickSort_Plus(int* arr, int begin, int end)
+{
+	while (begin < end)
+	{
+		int pivot = PrevCurMethod(arr, begin, end);
+
+		QuickSort(arr, begin, pivot - 1);
+		begin = pivot + 1;
 	}
 }
 
@@ -132,7 +152,7 @@ void noRecursive(int* arr, int begin, int end)
 		int left = StackTop(&s);
 		StackPop(&s);
 
-		int povit = PrevCurMethod(arr, left, right);
+		int povit = DigHole(arr, left, right);
 		//划分区间[left][povit - 1] [povit + 1][right]
 		if (left < povit)
 		{
@@ -155,8 +175,8 @@ int main()
 	int arr[10] = { 46, 74, 53, 14, 26, 36, 86, 65, 27, 34 };
 	int length = sizeof(arr) / sizeof(arr[0]) - 1;
 	int i = 0;
-	//noRecursive(arr, 0, length);
-	QuickSort(arr, 0, length);
+	noRecursive(arr, 0, length);
+	//QuickSort(arr, 0, length);
 	for (i = 0; i < 10; i++)
 	{
 		printf("%d ", arr[i]);

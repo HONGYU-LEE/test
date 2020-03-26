@@ -1,4 +1,4 @@
-package test_3_23;
+package test3_26;
 
 abstract public class Shape {
 	abstract public double getArea();
