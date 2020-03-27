@@ -7,13 +7,13 @@
 
 char buff[MAX_CMD];
 
-//1.è·å–å‘½ä»¤
+//1.»ñÈ¡ÃüÁî
 int get_cmd()
 {
 	memset(buff, 0x00, MAX_CMD);
 	printf("[lee@localhost ~]$ ");
 	fflush(stdout);
-	//æ¨¡æ‹Ÿç»ˆç«¯æ˜¾ç¤º
+	//Ä£ÄâÃüÁîĞĞ 
 	
 	fgets(buff, MAX_CMD - 1, stdin);
 	buff[strlen(buff) - 1] = '\0';
@@ -21,7 +21,7 @@ int get_cmd()
 
 }
 
-//2.è§£æå‘½ä»¤
+//2.½âÎöÃüÁî 
 char **do_parse(char *buff)
 {
 	char *ptr = buff;
@@ -41,19 +41,19 @@ char **do_parse(char *buff)
 		}
 		ptr++;
 	}
-	//å»æ‰ç©ºæ ¼ï¼Œæå–å‘½ä»¤
+	//ÌáÈ¡ÃüÁî 
 
 	argv[argc] = NULL;
 	return argv;
 }
 
-//3.ç¨‹åºæ›¿æ¢
+//3.³ÌĞòÌæ»» 
 int do_exec(char *buff)
 {
 	char **argv ={ NULL };
 
 	int pid = fork();
-	//åˆ›å»ºå­è¿›ç¨‹ï¼Œ åœ¨å­è¿›ç¨‹ä¸­è¿›è¡Œç¨‹åºæ›¿æ¢
+	//ÔÚ×Ó½ø³ÌÖĞ½øĞĞ³ÌĞòÌæ»» 
 	if(0 == pid)
 	{	
 		argv = do_parse(buff);
@@ -61,19 +61,19 @@ int do_exec(char *buff)
 		if(NULL != argv[0])
 		{
 			execvp(argv[0], argv);
-			//æ›¿æ¢è¿›ç¨‹
+			//³ÌĞòÌæ»»
 		}
 		else
 		{
 			exit(-1);
-			//è¾“å…¥å‘½ä»¤é”™è¯¯åˆ™é€€å‡ºè¿›ç¨‹
+			//ÍË³ö½ø³Ì 
 		}
 			
 	}	
 	else
 	{
 		waitpid(pid, NULL, 0);
-		//ç­‰å¾…å­è¿›ç¨‹é€€å‡º
+		//½ø³ÌµÈ´ı
 	}
 	
 	return 0;
