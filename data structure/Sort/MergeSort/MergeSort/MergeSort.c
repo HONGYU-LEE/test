@@ -2,21 +2,28 @@
 #include<malloc.h>
 #include<string.h>
 
+void print(int* arr, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	
+	printf("\n");
+}
+
 void _MergeSort(int *arr, int begin, int end, int *temp)
 {
 	if (begin >= end)
 		return;
 
 	int mid = begin + ((end - begin) >> 1);
-
-	_MergeSort(arr, begin, mid, temp);
-	_MergeSort(arr, mid + 1, end, temp);
-
 	int begin1 = begin, end1 = mid;
 	int begin2 = mid + 1, end2 = end;
 	int i = begin;
 
-
+	_MergeSort(arr, begin1, end1, temp);
+	_MergeSort(arr, begin2, end2, temp);
 
 	while (begin1 <= end1 && begin2 <= end2)
 	{
@@ -39,13 +46,12 @@ void _MergeSort(int *arr, int begin, int end, int *temp)
 	{
 		temp[i++] = arr[begin2++];
 	}
-
 	memcpy(arr + begin, temp + begin, sizeof(int) * (end - begin + 1));
 }
 
 void MergeSort(int *arr, int n)
 {
-	int* temp = (int*)malloc(sizeof(int) * 20);
+	int* temp = (int*)malloc(sizeof(int) * n);
 	_MergeSort(arr, 0, n - 1, temp);
 	
 	free(temp);
