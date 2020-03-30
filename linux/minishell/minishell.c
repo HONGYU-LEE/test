@@ -3,17 +3,18 @@
 #include<string.h>
 #include<unistd.h>
 #include<sys/wait.h>
+#include<fcntl.h>
 #define  MAX_CMD  1024
 
 char buff[MAX_CMD];
 
-//1.»ñÈ¡ÃüÁî
+//1.è·å–å‘½ä»¤
 int get_cmd()
 {
 	memset(buff, 0x00, MAX_CMD);
 	printf("[lee@localhost ~]$ ");
 	fflush(stdout);
-	//Ä£ÄâÃüÁîĞĞ 
+	//æ¨¡æ‹Ÿç»ˆç«¯æ˜¾ç¤º
 	
 	fgets(buff, MAX_CMD - 1, stdin);
 	buff[strlen(buff) - 1] = '\0';
@@ -21,7 +22,7 @@ int get_cmd()
 
 }
 
-//2.½âÎöÃüÁî 
+//2.è§£æå‘½ä»¤
 char **do_parse(char *buff)
 {
 	char *ptr = buff;
@@ -41,39 +42,88 @@ char **do_parse(char *buff)
 		}
 		ptr++;
 	}
-	//ÌáÈ¡ÃüÁî 
+	//å»æ‰ç©ºæ ¼ï¼Œæå–å‘½ä»¤
 
 	argv[argc] = NULL;
 	return argv;
 }
 
-//3.³ÌĞòÌæ»» 
+void do_redirect(char *buff)
+{
+	int redirect_flag = 0;
+	char *redirect_file = NULL;
+	char *ptr = buff;
+
+	while(*ptr != '\0')
+	{
+		if(*ptr == '>')
+		{
+			*ptr++ = '\0';
+			++redirect_flag;
+
+			if(*ptr == '>')
+			{
+				++redirect_flag;
+				ptr++;
+			}
+			
+			while(*ptr == ' ' && *ptr != '\0')
+			{
+				ptr++;
+			}
+
+			redirect_file = ptr;
+
+			while(*ptr != ' ' && *ptr != '\0')
+			{
+				ptr++;
+			}
+				
+			*ptr = '\0';
+		}
+		ptr++;
+	}
+
+	if(redirect_flag == 1)
+	{
+		int fd = open(redirect_file, O_WRONLY|O_CREAT|O_TRUNC, 0664);
+		dup2(fd, 1);
+	}
+	else if(redirect_flag == 2)
+	{
+		int fd = open(redirect_file, O_WRONLY|O_CREAT|O_APPEND, 0664);
+		dup2(fd, 1);
+	}
+}
+
+//4.ç¨‹åºæ›¿æ¢
 int do_exec(char *buff)
 {
 	char **argv ={ NULL };
 
 	int pid = fork();
-	//ÔÚ×Ó½ø³ÌÖĞ½øĞĞ³ÌĞòÌæ»» 
+	//åˆ›å»ºå­è¿›ç¨‹ï¼Œ åœ¨å­è¿›ç¨‹ä¸­è¿›è¡Œç¨‹åºæ›¿æ¢
 	if(0 == pid)
 	{	
+		do_redirect(buff);
 		argv = do_parse(buff);
 		
 		if(NULL != argv[0])
 		{
 			execvp(argv[0], argv);
-			//³ÌĞòÌæ»»
+			//æ›¿æ¢è¿›ç¨‹
 		}
 		else
 		{
 			exit(-1);
-			//ÍË³ö½ø³Ì 
+			//è¾“å…¥å‘½ä»¤é”™è¯¯åˆ™é€€å‡ºè¿›ç¨‹
 		}
 			
 	}	
 	else
 	{
 		waitpid(pid, NULL, 0);
-		//½ø³ÌµÈ´ı
+		//ç­‰å¾…å­è¿›ç¨‹é€€å‡º
 	}
 	
 	return 0;
