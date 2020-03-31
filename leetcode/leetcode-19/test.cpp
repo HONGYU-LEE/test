@@ -1,20 +1,28 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        int len=1;
-        ListNode* temp=head;
-        while(temp->next){
-            temp=temp->next;
-            len++;
+        ListNode* newHead = new ListNode(NULL);
+        newHead->next = head;
+        ListNode* cur = newHead, *del = newHead;
+        if(head == NULL || n == 0)
+            return NULL;
+
+        for(int i = 0; i < n; i++)
+        {
+            cur = cur->next;
         }
-        if(n==len) return head->next;  //如果是第一个，则直接返回head->next;
-        int m=len-n-1;                 //倒数第n个，就是从头开始第len-n+1个，但是我们要保存他的前一个数字，并且数字是从1开始的；这里减了一个2
-        ListNode* pre=head,* now=head->next;
-        while(m>0){
-            pre=pre->next;
-            now=now->next;
-            m--;
+ 
+        while(cur->next)
+        {
+            cur = cur->next;
+            del = del->next;
         }
-        pre->next=now->next;
-        return head;
+        
+        ListNode* next = del->next;
+        del->next = next->next;  
+        delete next; 
+
+        return newHead->next;
+
     }
+};
