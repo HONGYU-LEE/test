@@ -290,9 +290,24 @@ public:
 	// 日期-日期 返回天数
 	int operator-(const Date& d)
 	{
-		Date d1(*this), d2(d);
+		Date max(*this), min(d);
+		int flag = 1;
 
-		return d1.CountDay() - d2.CountDay();
+		if (*this < d)
+		{
+			max = d;
+			min = *this;
+			flag = -1;
+		}
+
+		int count = 0;
+		while (max != min)
+		{
+			++count;
+			++min;
+		}
+
+		return flag * count;
 	}
 		
 
@@ -309,8 +324,8 @@ private:
 
 int main()
 {
-	Date d1(2020, 8, 16);
-	Date d2(2000, 8, 16);
+	Date d1(2040, 8, 16);
+	Date d2(2020, 8, 16);
 	d1.PrintDate();
 	d2.PrintDate();
 
