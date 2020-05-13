@@ -1,4 +1,6 @@
 #include<iostream>
+#include<string.h>
+#include<stdlib.h>
 using namespace std;
 
 class Date
@@ -322,12 +324,49 @@ private:
 	int _day;
 };
 
+//int main()
+//{
+//	Date d1(2180, 10, 10);
+//	Date d2(2180, 1, 1);
+//	d1.PrintDate();
+//	d2.PrintDate();
+//
+//	cout << d2 - d1 << endl;
+//}
+
+int GetMonthDay(int year, int month)
+{
+	int day[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+	if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+		day[1] = 29;
+
+	return day[month - 1];
+}
+int CountDay(int year, int month, int day)
+{
+	while (month > 0)
+	{
+		day += GetMonthDay(year, month);
+		month--;
+
+		if (!month && !year)
+		{
+			break;
+		}
+		if (!month)
+		{
+			--year;
+			month = 12;
+		}
+	}
+	return day;
+}
 int main()
 {
-	Date d1(2040, 8, 16);
-	Date d2(2020, 8, 16);
-	d1.PrintDate();
-	d2.PrintDate();
+	Date d1(1000, 1, 1);
+	Date d2(1001, 2, 1);
+	cout << (d1.CountDay() - d2.CountDay());
 
-	cout << d2 - d1 << endl;
+	return 0;
 }
