@@ -226,6 +226,7 @@ namespace lee
 			//拷贝数据到第pos个位置
 			memcpy(_str + pos, str, size);
 			_size += size;
+			_str[_size] = '\0';
 
 			return *this;
 		}
@@ -479,3 +480,4 @@ namespace lee
 		return in;
 	}
 }
+
