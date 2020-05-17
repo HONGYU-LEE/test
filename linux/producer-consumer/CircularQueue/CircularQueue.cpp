@@ -30,7 +30,7 @@ class CircularQueue
         //入队
         void Push(int data)
         {
-            //入队前先减少一个空闲资源，防止其他进程争抢资源，如果资源不够则阻塞
+            //入队前先减少一个空闲空闲，防止其他进程争抢资源，如果资源不够则阻塞
             sem_wait(&_empty);
             sem_wait(&_mutex);
             
@@ -39,7 +39,7 @@ class CircularQueue
            
             sem_post(&_mutex);
             sem_post(&_full);
-            //入队完成，使用资源+1，同时唤醒消费者使用资源
+            //入队完成，使用空间+1，同时唤醒消费者使用资源
         }
 
         //出队
@@ -63,7 +63,7 @@ class CircularQueue
         size_t _front;
         size_t _rear;
 
-        //需要三个信号量，一个互斥信号量，一个信号量表示空闲资源，一个信号量正在使用资源
+        //需要三个信号量，一个互斥信号量，一个信号量表示空闲空间，一个信号量具有数据的空间
         sem_t _mutex;
         sem_t _full;
         sem_t _empty;
