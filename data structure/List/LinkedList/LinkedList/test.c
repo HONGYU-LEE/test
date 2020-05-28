@@ -8,7 +8,7 @@ void test()
 	ListPushFront(&list, 3);
 	ListPushFront(&list, 4);
 	ListPrint(list);
-
+	ListInsert(&(list + 3), 5);
 
 	//ListPopBack(&list);
 	//ListPushBack(&list, 1);
