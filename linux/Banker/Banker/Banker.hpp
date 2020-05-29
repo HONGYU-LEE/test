@@ -42,6 +42,7 @@ public:
 		return _processNum;
 	}
 
+	//输出安全序列
 	void printSecurity()
 	{
 		std::cout << "--------------" << std::endl;
@@ -54,6 +55,7 @@ public:
 		std::cout << std::endl;
 	}
 
+	//输出函数
 	void OutPut()
 	{
 		std::cout << "*************************************" << std::endl;
@@ -83,13 +85,14 @@ public:
 		//检查资源请求是否合理
 		for (size_t i = 0; i < _resouceNum; i++)
 		{
+			//需求资源数已经超过最大值
 			if (request[i] > _need[pid][i])
 			{
 				std::cout << "需求资源数已经超过最大值" << std::endl;
 				return false;
 			}
 				
-
+			//尚无足够资源
 			if (request[i] > _available[i])
 			{
 				std::cout << "尚无足够资源，进程等待" << std::endl;
@@ -206,10 +209,8 @@ public:
 		}
 	}
 
-
-
 private:
-	friend Banker* Input();
+	friend Banker* Input();		//输入函数	
 	std::vector<int> _available;	//系统可利用的各类资源数目
 	std::vector< std::vector<int >> _max;	//每一个进程对各种资源的最大需求
 	std::vector< std::vector<int >> _allocation;	//系统中每一类资源当前已分配给每一进程的资源数
@@ -219,6 +220,7 @@ private:
 	size_t _resouceNum;	//资源数
 };
 
+//输入函数
 Banker* Input()
 {
 	size_t processNum, resouceNum;
