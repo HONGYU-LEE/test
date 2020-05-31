@@ -1,7 +1,7 @@
 #include"Banker.hpp"
 using namespace std;
 
-int main()
+void test()
 {
 	int flag = 0;
 	Banker* backup = Input();
@@ -50,7 +50,7 @@ int main()
 			cout << "请输入正确选项" << endl;
 			continue;
 		}
-	
+
 		if (result == true)
 		{
 			cout << "资源分配成功, 系统此时安全" << endl;
@@ -61,6 +61,9 @@ int main()
 			cout << "资源分配失败，此时不安全" << endl;
 		}
 	}
+}
 
-	return 0;
+int main()
+{
+	test();
 }

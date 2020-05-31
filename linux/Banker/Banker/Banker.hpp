@@ -1,18 +1,17 @@
 #include<iostream>
 #include<string>
 #include<vector>
-#include<cassert>
 
 class Banker
 {
 public:
+	friend Banker* Input();		//输入函数	
 	std::vector<std::string> _ResouceName; //资源名
 
 	Banker(std::vector<std::string> ResouceName
 		, std::vector<int> available
 		, std::vector< std::vector<int >> max
 		, std::vector< std::vector<int >> allocation)
-
 		: _ResouceName(ResouceName)
 		, _available(available)
 		, _max(max)
@@ -193,7 +192,6 @@ public:
 
 						std::cout << "可用资源"<< _ResouceName[j] << "更新为: " << work[j] << std::endl;
 					}
-
 					break;
 					//调用完后进入下一轮查找安全进程
 				}
@@ -204,13 +202,11 @@ public:
 			{
 				std::cout << "系统此时不安全" << std::endl;
 				return false;
-			}
-				
+			}	
 		}
 	}
 
 private:
-	friend Banker* Input();		//输入函数	
 	std::vector<int> _available;	//系统可利用的各类资源数目
 	std::vector< std::vector<int >> _max;	//每一个进程对各种资源的最大需求
 	std::vector< std::vector<int >> _allocation;	//系统中每一类资源当前已分配给每一进程的资源数
