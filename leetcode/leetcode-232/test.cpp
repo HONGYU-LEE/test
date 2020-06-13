@@ -1,3 +1,62 @@
+class MyQueue {
+public:
+    /** Initialize your data structure here. */
+    stack<int> pops;
+    stack<int> pushs;
+    MyQueue() {
+
+    }
+    
+    /** Push element x to the back of queue. */
+    void push(int x) {
+        pushs.push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    int pop() {
+        if(pops.empty())
+        {
+            while(!pushs.empty())
+            {
+                pops.push(pushs.top());
+                pushs.pop();
+            }
+        }
+
+        int ret = pops.top();
+        pops.pop();
+
+        return ret;
+    }
+    
+    /** Get the front element. */
+    int peek() {
+        if(pops.empty())
+        {
+            while(!pushs.empty())
+            {
+                pops.push(pushs.top());
+                pushs.pop();
+            }
+        }
+        return pops.top();
+    }
+    
+    /** Returns whether the queue is empty. */
+    bool empty() {
+        return pushs.empty() && pops.empty();
+    }
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
+
 #define STACKSIZE 100
 typedef int DataType;
 typedef struct Stack
