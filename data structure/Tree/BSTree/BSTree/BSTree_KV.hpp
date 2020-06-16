@@ -24,10 +24,71 @@ namespace lee
 	class BSTree
 	{
 		typedef BSTreeNode<K, V> Node;
+		typedef BSTree<K, V> Tree;
 
 	public:
 		BSTree() : _root(nullptr)
 		{}
+
+		~BSTree()
+		{
+			destory(_root);
+		}
+
+		BSTree(const Tree& temp) : _root(nullptr)
+		{
+			_root = copy(temp._root);
+		}
+
+		Tree& operator=(const Tree& temp)
+		{
+			if (this != &temp)
+			{
+				//先清空本树
+				destory(_root);
+				_root = copy(temp._root);
+			}
+
+			return *this;
+		}
+
+		//现代写法
+		//Tree& operator=(Tree temp)
+		//{
+		//	swap(temp);
+
+		//	return *this;
+		//}
+
+		void swap(Tree& temp)
+		{
+			std::swap(_root, temp._root);
+		}
+
+		Node* copy(const Node* root)
+		{
+			if (!root)
+				return nullptr;
+
+			Node* temp = new Node(root->_key, root->_value);
+			temp->_left = copy(root->_left);
+			temp->_right = copy(root->_right);
+
+			return temp;
+		}
+
+		void destory(Node*& root)
+		{
+			Node* node = root;
+			if (!root)
+				return;
+
+			destory(node->_left);
+			destory(node->_right);
+
+			delete node;
+			node = nullptr;
+		}
 
 		bool Insert(const K& key, const V& value)
 		{
