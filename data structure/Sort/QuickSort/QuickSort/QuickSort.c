@@ -170,14 +170,39 @@ void noRecursive(int* arr, int begin, int end)
 	StackDestroy(&s);
 }
 
+
+int Hoare1(int* arr, int begin, int end)
+{
+	//chancePovit(arr, begin, end);
+	int pivot = arr[begin];
+	int pivot_index = begin;
+	while (begin < end)
+	{
+		while (begin < end && arr[begin] <= pivot)
+		{
+			++begin;
+		}
+
+		while (begin < end && arr[end] >= pivot)
+		{
+			--end;
+		}
+
+		Swap(&arr[begin], &arr[end]);
+	}
+
+	//Swap(&arr[begin], &arr[pivot_index]);
+	return end;
+}
+
 int main()
 {
-	int arr[10] = { 46, 74, 53, 14, 26, 36, 86, 65, 27, 34 };
+	int arr[7] = { 30,15,40,28,50,10,70 };
 	int length = sizeof(arr) / sizeof(arr[0]) - 1;
 	int i = 0;
-	noRecursive(arr, 0, length);
+	Hoare1(arr, 0, length);
 	//QuickSort(arr, 0, length);
-	for (i = 0; i < 10; i++)
+	for (i = 0; i < 7; i++)
 	{
 		printf("%d ", arr[i]);
 	}
