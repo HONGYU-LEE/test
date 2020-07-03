@@ -417,7 +417,7 @@ namespace lee
 						}
 
 						//替换节点
-						cur->_kv.first = LeftMax->_kv.first;
+						std::swap(cur->_kv, LeftMax->_kv);
 
 						//判断当前节点是他父节点的哪一个子树, 因为已经是最右子树了，所以这个节点的右子树为空，但是左子树可能还有数据，所以让父节点指向他的左子树
 						//并且删除最右节点

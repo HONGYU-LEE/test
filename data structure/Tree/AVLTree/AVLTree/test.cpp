@@ -14,8 +14,9 @@ int main()
 	tree.Insert(make_pair(5, "sql"));
 	tree.Insert(make_pair(8, "java"));
 	tree.Insert(make_pair(4, "python"));
+	tree.erase(7);
 
-	cout << tree.IsBalance();
+	tree.InOrderTravel();
 
 	return 0;
 }
