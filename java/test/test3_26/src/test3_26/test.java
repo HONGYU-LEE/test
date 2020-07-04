@@ -1,23 +1,29 @@
 package test3_26;
 
+import java.util.Scanner;
 public class test {
-
-	public static void main(String[] args) {
-		// TODO 自动生成的方法存根
-		Circular c1 = new Circular();
-		c1.setRadius(3);
-		System.out.println(" Circular Area: " + c1.getArea() + " Perimeter: " + c1.getPerimeter());	
-		
-		Square s1 = new Square();
-		s1.setLength(2);
-		System.out.println(" Square Area: " + s1.getArea() + " Perimeter: " + s1.getPerimeter());
+	static int GetMonthDay(int year, int month)
+	{
+	    int []day = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	    
+	    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+	        day[1] =  29;
+	        
+	    return day[month - 1];
+	}
+	public static void main(String[] args) 
+	{Scanner sc=new Scanner(System.in);
 	
-		Rectangle r1 = new Rectangle();
-		r1.setLong(3);
-		r1.setWide(5);
-		
-		System.out.println(" Rectangle Area: " + r1.getArea() + " Perimeter: " + r1.getPerimeter());
+	int year = sc.nextInt();
+	int month = sc.nextInt();
+	String []monthName = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+	
+	System.out.print(monthName[month + 1] + ", " + year);
+	System.out.println(" has " + GetMonthDay(year, month) + "days");
 	
 	}
 
 }
+
+
+

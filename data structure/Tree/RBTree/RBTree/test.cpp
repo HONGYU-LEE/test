@@ -33,18 +33,26 @@ int main()
 {
 	lee::RBTree<int, pair<int, int> , KeyOfValue<int, int>> t;
 	int a[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
+
 	for (auto e : a)
 	{
 		t.Insert(make_pair(e, e));
 	}
 
+	auto i = t.begin();
 
-	for (auto it : t)
+	while (i != t.end())
 	{
-		cout << it.first << endl;
+		cout << (*i).first << endl;
+		i++;
+
 	}
 
 
+	//for (auto it : t)
+	//{
+	//	cout << it.first << endl;
+	//}
 
 	return 0;
 }

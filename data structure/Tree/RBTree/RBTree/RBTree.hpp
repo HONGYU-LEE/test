@@ -39,8 +39,10 @@ namespace lee
 	};
 
 	template<class T, class Ptr, class Ref>
-	struct __RBTreeIterator
+	class __RBTreeIterator
 	{
+
+	public:
 		typedef RBTreeNode<T> Node;
 		typedef __RBTreeIterator<T, Ptr, Ref> Self;
 
@@ -68,13 +70,12 @@ namespace lee
 
 				2.如果此时右子树为空，则说明当前节点的所有子树访问完，但是当前节点也可能为其他树的右子树，所以一直往上，找到孩子为父亲的左子树的结点，那个父亲的位置则是下一个位置
 			*/
-
 			if (_node->_right)
 			{
 				Node* cur = _node->_right;
 
 				//找到右子树的最左节点
-				while (cur && cur->_left)
+				while (cur->_left)
 				{
 					cur = cur->_left;
 				}
@@ -87,7 +88,7 @@ namespace lee
 				Node* cur = _node;
 				
 				//往上找，直到父节点为空或者孩子节点为父节点的左子树
-				while (parent->_left != cur)
+				while (parent->_right == cur)
 				{
 					cur = parent;
 					parent = parent->_parent;
@@ -163,23 +164,24 @@ namespace lee
 
 		bool operator!=(const Self& s)
 		{
-			return &_node != &s._node;
+			return _node != s._node;
 		}
 
+	private:
 		Node* _node;
 	};
 
 	template<class K, class T, class KOfV>
 	class RBTree
 	{
+
+	public:
 		typedef RBTreeNode<T> Node;
 		typedef __RBTreeIterator<T, T*, T&> iterator;
 		typedef __RBTreeIterator<T, const T*, const T&> const_iterator;
 
-	public:
 		RBTree() 
-			: _root(nullptr)
-			, _head(new Node(T(), RED))
+			: _head(new Node(T(), RED))
 		{
 			_head->_left = _head;
 			_head->_right = _head;
@@ -380,18 +382,18 @@ namespace lee
 			KOfV kofv;
 
 			//按照二叉搜索树的规则先找到位置
-			if (_root == nullptr)
+			//创建根节点
+			if (_head->_parent == _head)
 			{
-				_root = new Node(data, BLACK);
+				Node* root = new Node(data, BLACK);
 
 				//形成环形结构
-				_root->_parent = _head;
+				root->_parent = _head;
+				_head->_left = root;
+				_head->_right = root;
+				_head->_parent = root;
 
-				_head->_left = _root;
-				_head->_right = _root;
-				_head->_parent = _root;
-
-				return make_pair(iterator(_root), true);
+				return std::make_pair(iterator(_head->_parent), true);
 			}
 
 			Node* cur = _head->_parent;
@@ -411,7 +413,7 @@ namespace lee
 				}
 				else
 				{
-					return make_pair(iterator(cur), false);
+					return std::make_pair(iterator(cur), false);
 				}
 			}
 
@@ -433,7 +435,7 @@ namespace lee
 			cur->_parent = parent;
 
 			//更新红黑树，如果父节点的颜色为黑，则说明满足条件，不需要处理，如果为红，则说明不满足，需要处理。
-			while (cur != _head->_parent && parent && parent->_color == RED)
+			while (cur != _head->_parent->_parent && parent && parent->_color == RED)
 			{
 				Node* ppNode = parent->_parent;
 
@@ -524,7 +526,7 @@ namespace lee
 			_head->_left = leftMax();
 			_head->_right = rightMax();
 
-			return make_pair(iterator(newNode), true);
+			return std::make_pair(iterator(newNode), true);
 		}
 
 		/*
@@ -537,20 +539,20 @@ namespace lee
 		*/
 		bool IsRBTree()
 		{
-			if (_root == nullptr)
+			if (_head->_parent == nullptr)
 			{
 				//空树也是红黑树
 				return true;
 			}
 
 			//违反性质1
-			if (_root->_color != BLACK)
+			if (_head->_parent->_color != BLACK)
 			{
 				return false;
 			}
 
 			//获取从根节点出发的任意一条子路径的黑色节点数，这里选取最左子树。
-			Node* cur = _root;
+			Node* cur = _head->_parent;
 			size_t blackCount = 0;
 			size_t count = 0;
 
@@ -565,7 +567,7 @@ namespace lee
 			}
 
 			//递归判断其他路径的黑色节点数
-			return _IsRBTree(_root, count, blackCount);
+			return _IsRBTree(_head->_parent, count, blackCount);
 		}
 
 		bool _IsRBTree(Node* root, size_t count, const size_t blackCount)
@@ -603,7 +605,6 @@ namespace lee
 		}
 		
 	private:
-		Node* _root;
 		//封装一个头结点，头结点的父亲指向根节点，左子树指向begin()也就是最左节点，右子树则为最右节点，这么做的意义是因为end(）要返回最右节点的下一个节点。
 		//并且头结点为红色，用于区分根节点
 		Node* _head;
