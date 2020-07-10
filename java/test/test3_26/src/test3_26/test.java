@@ -1,4 +1,4 @@
-package test3_26;
+/*package test3_26;
 
 import java.util.Scanner;
 public class test {
@@ -24,6 +24,28 @@ public class test {
 	}
 
 }
-
+*/
+package test3_26;
+class Ca 
+{
+	int a;
+	static int b;
+	public static void m1()
+	{
+	 int a=10;
+	 int b=20;
+	}
+	public void m2()
+	{
+		a=5;
+		b=5;
+	}
+	public static void m3()
+	{
+		m1();
+		m2();
+	}		
+	
+}
 
 
