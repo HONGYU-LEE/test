@@ -42,10 +42,19 @@ namespace lee
 			, _str(nullptr)
 		{
 			string temp(s._str);
+			std::cout << "拷贝构造" << std::endl;
 			swap(temp);
 		}
 
-		/*
+		string(string&& s)
+			: _size(s._size)
+			, _capacity(s._capacity)
+			, _str(nullptr)
+		{
+			std::cout << "移动构造" << std::endl;
+			std::swap(_str, s._str);
+		}
+		
 		//传统写法,开空间拷贝数据
 		string& operator=(const string& s)
 		{
@@ -59,17 +68,27 @@ namespace lee
 				_str = str;
 
 			}
-
+			std::cout << "赋值" << std::endl;
 			return *this;
 		}
-		*/
+		
 
-		//现代写法,直接用构造函数构建然后交换
-		string& operator=(const string& s)
+		////现代写法,直接用构造函数构建然后交换
+		//string& operator=(const string& s)
+		//{
+		//	string temp(s);
+		//	swap(temp);
+
+		//	std::cout << "赋值" << std::endl;
+		//	return *this;
+		//}
+
+		string& operator=(string&& s)
 		{
-			string temp(s._str);
-			swap(temp);
-
+			_size = s._size;
+			_capacity = s._capacity;
+			std::swap(_str, s._str);
+			std::cout << "移动赋值" << std::endl;
 			return *this;
 		}
 
@@ -274,7 +293,12 @@ namespace lee
 		{
 			_str[--_size] = '\0';
 		}
+		string operator+(const string& s2)
+		{
+			string ret(*this);
 
+			return ret;  
+		}
 		//追加字符
 		string& operator+=(char c)
 		{
